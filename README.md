@@ -34,4 +34,4 @@ This project was developed using using Jest and Enzyme testing utilities. To run
 ## Project Layout
 
 Landing Page:
-![Landing Page](https://i.imgur.com/SmTNwMX.jpg)
+![Landing Page]()
