@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   Button,
+  TouchableOpacity
 } from 'react-native';
 
 type Props = {};
@@ -27,27 +28,31 @@ export default class Login extends Component <Props> {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>
-          Login Form
+          Welcome! Sign In:
         </Text>
         <TextInput
           style={styles.input}
           value={this.state.email}
-          onChangeText={(email) => this.setState({ email })}/>
+          onChangeText={(email) => this.setState({ email })}
+          placeholder="email"/>
         <TextInput
           style={styles.input}
           value={this.state.password}
           secureTextEntry={true}
-          onChangeText={(password) => this.setState({ password })}/>
-        <Button
+          onChangeText={(password) => this.setState({ password })}
+          placeholder="password"/>
+        <TouchableOpacity
           onPress={this.handleLogin}
-          overrides={{ backgroundColor: 'purple' }}
-          title="Login"/>
-        <Button
+          style={styles.loginBtn}>
+            <Text>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           onPress={this.handleRegistration}
-          overrides={{ backgroundColor: 'teal' }}
-          title="Register"/>
+          style={styles.registerBtn}>
+            <Text>Register</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -55,7 +60,6 @@ export default class Login extends Component <Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -67,9 +71,21 @@ const styles = StyleSheet.create({
     height: 25,
   },
   loginBtn: {
-    backgroundColor: 'magenta',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'purple',
+    margin: 10,
+    width: 150,
+    height: 25,
   },
   registerBtn: {
-    backgroundColor: 'yellow',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'teal',
+    margin: 10,
+    width: 150,
+    height: 25,
   }
 });
