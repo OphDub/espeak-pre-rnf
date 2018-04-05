@@ -43,6 +43,17 @@ app.get('/api/v1/words', ( request, response ) => {
   })
 })
 
+app.get('/api/v1/words/:stack_id', (request, response) => {
+  const { stack_id } = request.params;
+  database('words').where('stack_id', stack_id).select()
+  .then( words => {
+    response.status(200).json(words)
+  })
+  .catch( error => {
+    response.status(500).json({ error });
+  })
+})
+
 app.get('/api/v1/stack', ( request, response ) => {
   database('stack').select()
   .then( stack => {

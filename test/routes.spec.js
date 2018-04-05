@@ -76,4 +76,48 @@ describe('API Routes', () => {
     })
   })
 
+  describe('GET /api/v1/words/:stack_id', () => {
+    it('should return an array of words associated with given stack id' , () => {
+      return chai.request(server)
+      .get('/api/v1/words/1')
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body[0].should.have.all.keys(['english', 'spanish', 'hint', 'id', 'stack_id']);
+        response.body[0].english.should.equal('hi');
+        response.body[0].spanish.should.equal('hola');
+        response.body[0].hint.should.equal('oh-la');
+        response.body[0].stack_id.should.equal(1);
+      })
+    })
+  });
+
+  describe('GET /api/v1/stack', () => {
+    it('should return all of the stacks', () => {
+      return chai.request(server)
+      .get('/api/v1/stack')
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body[0].should.have.all.keys(['category', 'id']);
+        response.body[0].category.should.equal('Basics 1');
+        response.body[0].id.should.equal(1);
+      })
+    })
+  })
+
+  describe('GET /api/v1/stack/:id', () => {
+    it('should return one stack', () => {
+      return chai.request(server)
+      .get('/api/v1/stack/1')
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body[0].should.have.all.keys(['category', 'id']);
+        response.body[0].category.should.equal('Basics 1');
+        response.body[0].id.should.equal(1);
+      })
+    })
+  })
+
 });
