@@ -60,6 +60,21 @@ describe('API Routes', () => {
     })
   })
 
+  describe('POST /api/v1/users', () => {
+    return chai.request(server)
+    .post('/api/v1/users')
+    .send({
+      name: 'pophus',
+      email: 'pophus@notpophanda.com',
+      stack_id: 1
+    })
+    .then( response => {
+      response.should.have.status(202);
+      response.should.be.json;
+      response.body.user[0].should.equal(2)
+    })
+  })
+
   describe('GET /api/v1/words', () => {
     it('should return all the words', () => {
       return chai.request(server)
