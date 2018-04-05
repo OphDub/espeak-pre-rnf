@@ -35,14 +35,42 @@ describe('API Routes', () => {
         response.should.have.status(200)
         response.should.be.json;
         response.body.should.be.a('array');
-        response.body[0].should.have.property('id');
+        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id'])
         response.body[0].id.should.equal(1)
-        response.body[0].should.have.property('name');
         response.body[0].name.should.equal('jon snow');
-        response.body[0].should.have.property('email');
-        response.body[0].should.have.property('email');
         response.body[0].email.should.equal('jon@knownothing.com')
-        response.body[0].should.have.property('stack_id');
+        response.body[0].stack_id.should.equal(1);
+      })
+    })
+  })
+
+  describe('GET /api/v1/users/:id', () => {
+    it('should return just one user', () => {
+      return chai.request(server)
+      .get('/api/v1/users/1')
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id'])
+        response.body[0].id.should.equal(1)
+        response.body[0].name.should.equal('jon snow');
+        response.body[0].email.should.equal('jon@knownothing.com')
+        response.body[0].stack_id.should.equal(1);        
+      })
+    })
+  })
+
+  describe('GET /api/v1/words', () => {
+    it('should return all the words', () => {
+      return chai.request(server)
+      .get('/api/v1/words')
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body[0].should.have.all.keys(['english', 'spanish', 'hint', 'id', 'stack_id']);
+        response.body[0].english.should.equal('hi');
+        response.body[0].spanish.should.equal('hola');
+        response.body[0].hint.should.equal('oh-la');
         response.body[0].stack_id.should.equal(1);
       })
     })
