@@ -5,8 +5,23 @@ import {
   View,
   TextInput,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
+import { keys } from '../../keys';
+import * as firebase from 'firebase';
+
+const config = {
+  apiKey: keys.firebase,
+  authDomain: "espeak-53f28.firebaseapp.com",
+  databaseURL: "https://espeak-53f28.firebaseio.com",
+  projectId: "espeak-53f28",
+  storageBucket: "espeak-53f28.appspot.com",
+  messagingSenderId: "535165125077"
+};
+
+firebase.initializeApp(config);
+
+const auth = firebase.auth();
 
 type Props = {};
 export default class Login extends Component <Props> {
@@ -18,8 +33,16 @@ export default class Login extends Component <Props> {
     };
   }
 
-  handleLogin = () => {
+  handleLogin = async () => {
+    const { email, password } = this.state;
 
+    try {
+      const user = await auth.signInWithEmailAndPassword(email, password);
+
+      console.log('User signed in', user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleRegistration = () => {
