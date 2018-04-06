@@ -10,7 +10,7 @@ const decks = [
   },
   {
     category: 'Food 2'
-  }.
+  },
   {
     category: 'Verbs'
   }
