@@ -70,11 +70,11 @@ export default class App extends Component<Props> {
   }
 
   showCondition = () => {
-    if (this.state.user) {
+    //if (this.state.user) {
       return <RootNav />
-    } else {
-      return <Login handleLogin={this.handleLogin} />
-    }
+    //} else {
+      //return <Login handleLogin={this.handleLogin} />
+    //}
   }
 
   render() {
