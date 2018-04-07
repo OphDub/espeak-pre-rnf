@@ -6,11 +6,37 @@ import {
   TextInput,
   Button,
 } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+
 import Login from '../Login/Login';
 import Home from '../Home/Home';
-
+import WordStackNav from '../WordStackNav/WordStackNav';
+//import Decks from '../Decks/Decks';
 import { keys } from '../../keys';
 import * as firebase from 'firebase';
+
+const routeConfig = {
+  Home: {
+    screen: Home
+  },
+  Decks: {
+    screen: WordStackNav
+  }
+  // Decks: {
+  //   screen: Decks
+  // }
+}
+
+const navConfig = {
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 38,
+    }
+  }
+}
+
+const RootNav = TabNavigator(routeConfig, navConfig);
+
 
 const config = {
   apiKey: keys.firebase,
@@ -54,24 +80,8 @@ export default class App extends Component<Props> {
 
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          eSpeak
-        </Text>
-        {
-          !this.state.user && 
-          <Login handleLogin={this.handleLogin}/>
-        }
-        {
-          this.state.loading && 
-          <Text>Loading ...</Text>
-        }
-        {
-          this.state.user &&
-          <Home user={this.state.user}/>
-        }
-      </View>
+    return (   
+      <RootNav />
     );
   }
 }

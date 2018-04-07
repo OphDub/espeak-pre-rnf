@@ -14,18 +14,26 @@ export default class Home extends Component <Props> {
     this.state = {}
   }
 
-  componentDidMount() {
-  }
-
   render() {
     return (
-      <View>
-        <Text>HOME</Text>
+      <View style={styles.container}>
+        <Text style={styles.welcome}>HOME</Text>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-
-})
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'purple',
+  },
+  welcome: {
+    fontSize: 60,
+    textAlign: 'center',
+    color: 'white',
+    margin: 60,
+  },
+});
