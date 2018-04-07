@@ -25,7 +25,14 @@ export default class WordCards extends Component<Props> {
     //console.log(this.state.stack);
     const { id } = this.state.stack;
     const promise = await fetch(`https://espeak-be.herokuapp.com/api/v1/words/${id}`)
-    const words = await promise.json()
+    const jsonResponse = await promise.json()
+    const words = jsonResponse.map((word, index) => {
+      if (index === 0) {
+        return {...word, isCurrent: true, isCompleted: false};
+      }
+
+      return {...word, isCurrent: false, isCompleted: false};
+    })
     this.setState({words})
     console.log(words);
   }
@@ -36,6 +43,8 @@ export default class WordCards extends Component<Props> {
 
   render() {
     const { params } = this.props.navigation.state;
+    const renderedCard = this.state.words.find(card => card.isCurrent === true) || {english: 'not rendered it'};
+    console.log(renderedCard);
     //console.log (params);
     return (
       <View style={styles.container}>
@@ -47,6 +56,7 @@ export default class WordCards extends Component<Props> {
         onPress={() => this.handlePress()}
         >
           {params.category}
+          {renderedCard.english}
         </Text>
       </View>
     );
