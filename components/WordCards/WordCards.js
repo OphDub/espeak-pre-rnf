@@ -43,7 +43,7 @@ export default class WordCards extends Component<Props> {
 
   render() {
     const { params } = this.props.navigation.state;
-    const renderedCard = this.state.words.find(card => card.isCurrent === true) || {english: 'not rendered it'};
+    const renderedCard = this.state.words.find(card => card.isCurrent === true) || null; 
     console.log(renderedCard);
     //console.log (params);
     return (
