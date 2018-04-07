@@ -11,7 +11,6 @@ import { TabNavigator } from 'react-navigation';
 import Login from '../Login/Login';
 import Home from '../Home/Home';
 import WordStackNav from '../WordStackNav/WordStackNav';
-//import Decks from '../Decks/Decks';
 import { keys } from '../../keys';
 import * as firebase from 'firebase';
 
@@ -22,9 +21,6 @@ const routeConfig = {
   Decks: {
     screen: WordStackNav
   }
-  // Decks: {
-  //   screen: Decks
-  // }
 }
 
 const navConfig = {
@@ -62,12 +58,7 @@ export default class App extends Component<Props> {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   handleLogin = async (email, password) => {
-    //const { email, password } = this.state;
     this.setState({loading: true})
     try {
       const user = await auth.signInWithEmailAndPassword(email, password);
@@ -77,7 +68,6 @@ export default class App extends Component<Props> {
       console.log(error);
     }
   }
-
 
   render() {
     return (   

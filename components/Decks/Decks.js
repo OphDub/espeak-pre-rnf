@@ -17,19 +17,14 @@ export default class Decks extends Component<Props> {
   constructor() {
     super()
     this.state={
-      //Store Diff decks here
-      decks: [
-        {
-          "category": "basics",
-          "words": ["HI"]
-        },
-        {
-          "category": "food",
-          "words": ["Hotdog"]
-
-        }
-      ]
+      decks: []
     }
+  }
+
+  async componentDidMount() {
+    const promise = await fetch('https://espeak-be.herokuapp.com/api/v1/stack')
+    const decks = await promise.json();
+    this.setState({decks})
   }
 
   navigateToCards(deck) {
@@ -40,12 +35,12 @@ export default class Decks extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-      <Text style={styles.item}>Decks here</Text>
         <FlatList
           data={this.state.decks}
           renderItem={({ item }) => (
             <Text 
               onPress={() => this.navigateToCards(item)}
+              value={item.id}
               style={styles.item} >
               {item.category}
             </Text>

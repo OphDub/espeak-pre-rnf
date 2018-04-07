@@ -16,10 +16,13 @@ export default class WordCards extends Component<Props> {
 
   render() {
     const { params } = this.props.navigation.state;
-    console.log("Im here", params);
+    console.log(params);
     return (
       <View style={styles.container}>
-        <Text style={styles.item}>{params.word}</Text>
+      {
+        //Rigth now I'm just passing the category to the text but I imagine here we'd want to display the words associated with that category and how to guess for them and stuff
+      }
+        <Text style={styles.item}>{params.category}</Text>
       </View>
     );
   }
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'yellow',
+    backgroundColor: 'skyblue',
   },
   item: {
     color: "purple",
