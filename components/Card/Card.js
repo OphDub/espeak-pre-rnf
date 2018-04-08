@@ -15,20 +15,18 @@ export default class Card extends Component {
   }
 
   handleSubmit = () => {
-    // need to compare the input to the spanish value passed down by props
-    // if correct, send msg up to WordCards so that it moves on to the next card
     // if incorrect, send some sort of alert to user to try again
     const { answer } = this.state;
-    const { spanish } = this.props.word;
+    const { onCorrectAnswer, word } = this.props;
+    const { spanish } = word;
     if (answer.toLowerCase() === spanish) {
-      // handleCorrectAnswer from WordsCards
-      console.log('correct answer');
+      onCorrectAnswer(word);
     } else {
       // send alert to user
       console.log('wrong answer');
-      this.setState({ answer: '' });
     }
     
+    this.setState({ answer: '' });
   }
 
   render() {
