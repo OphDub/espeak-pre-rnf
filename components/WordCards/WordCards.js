@@ -34,7 +34,6 @@ export default class WordCards extends Component<Props> {
       return {...word, isCurrent: false, isCompleted: false};
     })
     this.setState({words})
-    console.log(words);
   }
 
   handlePress = () => {
@@ -54,12 +53,8 @@ export default class WordCards extends Component<Props> {
   render() {
     const { params } = this.props.navigation.state;
     const currentCard = this.state.words.find(card => card.isCurrent === true) || null; 
-    console.log(currentCard);
     return (
       <View style={styles.container}>
-      {
-        //Rigth now I'm just passing the category to the text but I imagine here we'd want to display the words associated with that category and how to guess for them and stuff
-      }
         <Text 
         style={styles.item}
         onPress={() => this.handlePress()}

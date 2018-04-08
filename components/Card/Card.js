@@ -12,38 +12,24 @@ export default class Card extends Component {
       hint: ''
     }
   }
-
-  componentDidUpdate(nextProps) {
-    if (this.props !== nextProps) {
-      console.log('props have changed!')
-    }
-  }
   
   handleChange = (text) => {
-    console.log('change!');
     this.setState({answer: text})
   }
 
+  componentDidMount = () => {
+  }
+
   render() {
-console.log('card props', this.props.word);
-    let english;
-    let spanish;
-    let hint;
-    if (!this.props) {
-      console.log('no props');
-      english = null;
-      spanish = null;
-      hint = null;
-    } else {
-      english = this.props.word.english;
-      spanish = this.props.word.spanish;
-      hint = this.props.word.hint;
-    }
-    console.log('english', english);
+    var {english, spanish, hint} = this.props.word
+    
     return (
       <View style={styles.container}>
         <Text>How do you say...</Text>
-        <Text>{ english }</Text>
+        {
+        this.props &&
+          <Text>{ english }</Text>
+        }
         <Text>in Spanish?</Text>
         <TextInput 
           placeholder='Type word in Spanish'
