@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 type Props = {};
 export default class Card extends Component {
@@ -7,7 +8,16 @@ export default class Card extends Component {
     super();
     this.state = {
       answer: '',
+      showAlert: false,
     }
+  }
+
+  showAlert = () => {
+    this.setState({ showAlert: true })
+  }
+
+  hideAlert =() => {
+    this.setState({ showAlert: false })
   }
   
   handleChange = (text) => {
@@ -24,13 +34,16 @@ export default class Card extends Component {
     } else {
       // send alert to user
       console.log('wrong answer');
+      this.showAlert();
     }
     
     this.setState({ answer: '' });
   }
 
+  // Think about changing the cancel button to just get the answer}
   render() {
-    const {english, spanish, hint} = this.props.word
+    const {english, spanish, hint} = this.props.word;
+    const { showAlert } = this.state;
     
     return (
       <View style={styles.container}>
@@ -51,6 +64,25 @@ export default class Card extends Component {
         >
           <Text>SUBMIT</Text>
         </TouchableOpacity> 
+        <AwesomeAlert
+          show={showAlert}
+          showProgress={false}
+          title="Almost..."
+          message="You've got this!"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText="No, cancel"
+          confirmText="Try again!"
+          confirmButtonColor="#3AAFb9"
+          onCancelPressed={() => {
+            this.hideAlert();
+          }}
+          onConfirmPressed={() => {
+            this.hideAlert();
+          }}
+        />
       </View>
     )
   }
