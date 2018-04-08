@@ -47,7 +47,6 @@ firebase.initializeApp(config);
 
 const auth = firebase.auth();
 
-
 type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
@@ -70,11 +69,13 @@ export default class App extends Component<Props> {
   }
 
   showCondition = () => {
-    //if (this.state.user) {
-      return <RootNav />
-    //} else {
-      //return <Login handleLogin={this.handleLogin} />
-    //}
+    if (this.state.user) {
+      return <RootNav 
+                screenProps={{userEmail: this.state.user}}
+              />
+    } else {
+      return <Login handleLogin={this.handleLogin} />
+    }
   }
 
   render() {

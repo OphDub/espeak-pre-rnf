@@ -16,7 +16,7 @@ export default class Home extends Component <Props> {
   }
 
   logout = () => {
-    console.log('logout')
+    console.log(this.props)
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class Home extends Component <Props> {
       <View style={styles.container}>
         <Text style={styles.title}>SETTINGS</Text>
         <View style={styles.statsDisplay}>
-          <Text style={styles.listItems}>Username: </Text>
+          <Text style={styles.listItems}>Username: {this.props.screenProps.userEmail}</Text>
           <Text style={styles.listItems}>Current Points: </Text>
           <Text style={styles.listItems}>Current Level:</Text>
         </View>
