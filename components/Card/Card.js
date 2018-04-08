@@ -7,9 +7,6 @@ export default class Card extends Component {
     super();
     this.state = {
       answer: '',
-      english: '',
-      spanish: '',
-      hint: ''
     }
   }
   
@@ -17,11 +14,25 @@ export default class Card extends Component {
     this.setState({answer: text})
   }
 
-  componentDidMount = () => {
+  handleSubmit = () => {
+    // need to compare the input to the spanish value passed down by props
+    // if correct, send msg up to WordCards so that it moves on to the next card
+    // if incorrect, send some sort of alert to user to try again
+    const { answer } = this.state;
+    const { spanish } = this.props.word;
+    if (answer.toLowerCase() === spanish) {
+      // handleCorrectAnswer from WordsCards
+      console.log('correct answer');
+    } else {
+      // send alert to user
+      console.log('wrong answer');
+      this.setState({ answer: '' });
+    }
+    
   }
 
   render() {
-    var {english, spanish, hint} = this.props.word
+    const {english, spanish, hint} = this.props.word
     
     return (
       <View style={styles.container}>
@@ -36,7 +47,10 @@ export default class Card extends Component {
           onChangeText={(text) => this.handleChange(text)}
           value={this.state.answer}
         />
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.handleSubmit()}
+          style={styles.submitBtn}
+        >
           <Text>SUBMIT</Text>
         </TouchableOpacity> 
       </View>
@@ -46,5 +60,7 @@ export default class Card extends Component {
 
 const styles = StyleSheet.create({
   container: {
+  },
+  submitBtn: {
   }
 })
