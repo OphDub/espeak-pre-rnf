@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import Card from '../Card/Card';
@@ -36,31 +37,51 @@ export default class WordCards extends Component<Props> {
     this.setState({words})
   }
 
-  handlePress = () => {
-    console.log('click')
-  }
-
   handleCardLoad = () => {
     if (this.state.words.length === 0) {
       return <Text>No Cards to Render</Text>;
     }
 
     const currentCard = this.state.words.find(card => card.isCurrent === true);
+    if (!currentCard) {
+      return (
+        <View>
+          <Text>Good job!</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Decks')}
+            style={styles.homeBtn}
+          >
+            <Text>BACK TO MY DECKS</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+    return <Card 
+      word={currentCard} 
+      onCorrectAnswer={this.handleCorrectAnswer}
+    />
+  }
 
-    return <Card word={currentCard} />
+  handleCorrectAnswer = (word) => {
+    const wordIndex = this.state.words.indexOf(word);
+    const words = this.state.words.map((word, index) => {
+      if (index === wordIndex) {
+        return {...word, isCurrent: false}
+      } else if (index === (wordIndex + 1)) {
+        return {...word, isCurrent: true}
+      }
+
+      return word;
+    });
+
+    this.setState({ words });
   }
 
   render() {
     const { params } = this.props.navigation.state;
-    const currentCard = this.state.words.find(card => card.isCurrent === true) || null; 
+
     return (
       <View style={styles.container}>
-        <Text 
-        style={styles.item}
-        onPress={() => this.handlePress()}
-        >
-          {params.category}
-        </Text>
         { this.handleCardLoad() }
       </View>
     );
@@ -79,5 +100,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
+  },
+  homeBtn: {
   },
 });
