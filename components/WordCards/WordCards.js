@@ -7,6 +7,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Card from '../Card/Card';
 
 type Props = {};
 export default class WordCards extends Component<Props> {
@@ -22,7 +23,6 @@ export default class WordCards extends Component<Props> {
   }
 
   componentDidMount = async () => {
-    //console.log(this.state.stack);
     const { id } = this.state.stack;
     const promise = await fetch(`https://espeak-be.herokuapp.com/api/v1/words/${id}`)
     const jsonResponse = await promise.json()
@@ -41,11 +41,20 @@ export default class WordCards extends Component<Props> {
     console.log('click')
   }
 
+  handleCardLoad = () => {
+    if (this.state.words.length === 0) {
+      return <Text>No Cards to Render</Text>;
+    }
+
+    const currentCard = this.state.words.find(card => card.isCurrent === true);
+
+    return <Card word={currentCard} />
+  }
+
   render() {
     const { params } = this.props.navigation.state;
-    const renderedCard = this.state.words.find(card => card.isCurrent === true) || null; 
-    console.log(renderedCard);
-    //console.log (params);
+    const currentCard = this.state.words.find(card => card.isCurrent === true) || null; 
+    console.log(currentCard);
     return (
       <View style={styles.container}>
       {
@@ -56,8 +65,8 @@ export default class WordCards extends Component<Props> {
         onPress={() => this.handlePress()}
         >
           {params.category}
-          {renderedCard.english}
         </Text>
+        { this.handleCardLoad() }
       </View>
     );
   }
