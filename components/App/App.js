@@ -9,18 +9,18 @@ import {
 import { TabNavigator } from 'react-navigation';
 
 import Login from '../Login/Login';
-import Home from '../Home/Home';
+import Settings from '../Settings/Settings';
 import WordStackNav from '../WordStackNav/WordStackNav';
 import { keys } from '../../keys';
 import * as firebase from 'firebase';
 
 const routeConfig = {
-  Home: {
-    screen: Home
-  },
   Decks: {
     screen: WordStackNav
-  }
+  },
+  Settings: {
+    screen: Settings
+  },
 }
 
 const navConfig = {
