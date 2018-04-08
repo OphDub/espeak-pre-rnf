@@ -68,13 +68,26 @@ export default class App extends Component<Props> {
     }
   }
 
+  handleRegistration = async () => {
+    this.setState({loading: true})
+    try {
+      const user = await auth.createUserWithEmailAndPassword(email, password);
+      this.setState({ user: user.email, loading: false })
+      console.log('User created', user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   showCondition = () => {
     if (this.state.user) {
       return <RootNav 
                 screenProps={{userEmail: this.state.user}}
               />
     } else {
-      return <Login handleLogin={this.handleLogin} />
+      return <Login handleLogin={this.handleLogin}
+                    handleRegistration={this.handleRegistration}/>
+
     }
   }
 

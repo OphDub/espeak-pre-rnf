@@ -24,12 +24,10 @@ export default class Decks extends Component<Props> {
   async componentDidMount() {
     const promise = await fetch('https://espeak-be.herokuapp.com/api/v1/stack')
     const decks = await promise.json();
-    console.log(decks)
     this.setState({decks})
   }
 
   navigateToCards(deck) {
-    console.log(deck)
     this.props.navigation.navigate('WordCards', deck)
   }
 
