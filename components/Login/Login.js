@@ -7,6 +7,7 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
+import Register from '../Register/Register';
 
 type Props = {};
 export default class Login extends Component <Props> {
@@ -14,15 +15,12 @@ export default class Login extends Component <Props> {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      toggleRegister: false
     };
   }
 
-  handleRegistration = () => {
-
-  }
-
-  render() {
+  renderLogin = () => {
     return (
       <View style={styles.container}>
         <Text>
@@ -45,10 +43,36 @@ export default class Login extends Component <Props> {
             <Text>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={this.handleRegistration}
+          onPress={() => this.toggleRegistration()}
           style={styles.registerBtn}>
-            <Text>Register</Text>
+            <Text>New user? Register</Text>
         </TouchableOpacity>
+      </View>
+    )
+  }
+
+  renderRegister = () => {
+    return (
+      <Register handleRegistration={this.props.handleRegistration}
+                toggleRegistration={this.toggleRegistration}/>
+    )
+  }
+
+  toggleRegistration = () => {
+    const { toggleRegister } = this.state;
+
+    if(!toggleRegister) {
+      this.setState({ toggleRegister: true })
+    } else {
+      this.setState({ toggleRegister: false })
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        { !this.state.toggleRegister && this.renderLogin() }
+        { this.state.toggleRegister && this.renderRegister() }
       </View>
     )
   }
@@ -79,7 +103,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'teal',
     margin: 10,
     width: 150,
     height: 25,
