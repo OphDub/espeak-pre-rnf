@@ -30,7 +30,7 @@ module.exports = {
     },
     useNullAsDefault: true,
     seeds: {
-      directory: './db/seeds/test'
+      directory: './db/seeds/dev'
     }
   }
 };

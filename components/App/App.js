@@ -6,11 +6,33 @@ import {
   TextInput,
   Button,
 } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+
 import Login from '../Login/Login';
 import Home from '../Home/Home';
-
+import WordStackNav from '../WordStackNav/WordStackNav';
 import { keys } from '../../keys';
 import * as firebase from 'firebase';
+
+const routeConfig = {
+  Home: {
+    screen: Home
+  },
+  Decks: {
+    screen: WordStackNav
+  }
+}
+
+const navConfig = {
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 38,
+    }
+  }
+}
+
+const RootNav = TabNavigator(routeConfig, navConfig);
+
 
 const config = {
   apiKey: keys.firebase,
@@ -36,12 +58,7 @@ export default class App extends Component<Props> {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   handleLogin = async (email, password) => {
-    //const { email, password } = this.state;
     this.setState({loading: true})
     try {
       const user = await auth.signInWithEmailAndPassword(email, password);
@@ -52,26 +69,17 @@ export default class App extends Component<Props> {
     }
   }
 
+  showCondition = () => {
+    //if (this.state.user) {
+      return <RootNav />
+    //} else {
+      //return <Login handleLogin={this.handleLogin} />
+    //}
+  }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          eSpeak
-        </Text>
-        {
-          !this.state.user && 
-          <Login handleLogin={this.handleLogin}/>
-        }
-        {
-          this.state.loading && 
-          <Text>Loading ...</Text>
-        }
-        {
-          this.state.user &&
-          <Home user={this.state.user}/>
-        }
-      </View>
+    return (   
+      this.showCondition()
     );
   }
 }
