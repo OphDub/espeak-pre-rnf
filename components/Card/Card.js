@@ -48,10 +48,12 @@ export default class Card extends Component {
     return (
       <View style={styles.container}>
         <Text>How do you say...</Text>
+        <View style={styles.engCard}>
         {
         this.props &&
-          <Text>{ english }</Text>
+          <Text style={styles.engText}>{ english }</Text>
         }
+        </View>
         <Text>in Spanish?</Text>
         <TextInput 
           placeholder='Type word in Spanish'
@@ -90,6 +92,20 @@ export default class Card extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  engCard: {
+    alignItems: 'center',
+    borderColor: '#1E3888',
+    borderRadius: 8,
+    borderWidth: 2,
+    paddingVertical: 30,
+    width: 150,
+  },
+  engText: {
+    color: '#1E3888'
   },
   submitBtn: {
   }
