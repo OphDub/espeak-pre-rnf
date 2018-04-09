@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   question: {
+    fontFamily: 'Roboto',
     fontSize: 20,
   },
   engCard: {
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingVertical: 35,
     width: 220,
-    marginVertical: 15,
+    marginVertical: 20,
     shadowColor: '#979797',
     shadowOpacity: 0.7,
     shadowOffset: { width: 2, height: 2 },
@@ -133,6 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3AAFB9',
     padding: 10,
     borderRadius: 8,
+    marginTop: 10,
     shadowColor: '#979797',
     shadowOpacity: 0.7,
     shadowOffset: { width: 2, height: 2 },
