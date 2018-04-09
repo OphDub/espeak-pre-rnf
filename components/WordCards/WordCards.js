@@ -92,14 +92,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'skyblue',
-  },
-  item: {
-    color: "purple",
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+    alignItems: 'stretch',
   },
   homeBtn: {
   },
