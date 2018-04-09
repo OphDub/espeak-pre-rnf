@@ -19,6 +19,7 @@ export default class Register extends Component <Props>{
       password: '',
       confirmPassword: '',
       showAlert: false,
+      alertMsg: '',
     }
   }
 
@@ -29,17 +30,30 @@ export default class Register extends Component <Props>{
       password,
       confirmPassword,
     } = this.state;
+    const user = { email, userName, password };
 
-    if (password === '' || confirmPassword === '') {
-      //alert message for passwords as empty
+    let alertMsg;
+
+    if (email === '' || userName === '') {
+      alertMsg = `Please provide a email and username.`;
+      return this.setState({ showAlert: true, alertMsg });
+    } else if (password === '' || confirmPassword === '') {
+      alertMsg = `Please add a password.`;
+      return this.setState({ showAlert: true, alertMsg });
+    } else if (password !== confirmPassword) {
+      alertMsg = `Please make sure your passwords match.`;
+      return this.setState({ showAlert: true, alertMsg });
     }
 
-    if (password !== confirmPassword) {
-      //alert message for passwords not matching
-    }
+    this.props.toggleRegistration(user);
+  }
 
-    const registration = { email, userName, password };
-    // this.props.toggleRegistration(registration);
+  showAlert = () => {
+    this.setState({ showAlert: true });
+  }
+
+  hideAlert = () => {
+    this.setState({ showAlert: false });
   }
 
   render() {
@@ -69,14 +83,30 @@ export default class Register extends Component <Props>{
           onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
           placeholder="confirm password"/>
         <TouchableOpacity
-          style={styles.registerBtn}>
+          style={styles.registerBtn}
+          onPress={() => this.validateRegistration() }>
           <Text>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.validateRegistration() }
+          onPress={() => this.props.toggleRegistration() }
           style={styles.loginBtn}>
             <Text>Have account? Login</Text>
         </TouchableOpacity>
+        <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title={`Uh oh! There's a problem with your registration!`}
+          message={this.state.alertMsg}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#3AAFb9"
+          onConfirmPressed={() => {
+            this.hideAlert();
+          }}
+        />
       </View>
     )
   }
