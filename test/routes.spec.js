@@ -35,7 +35,7 @@ describe('API Routes', () => {
         response.should.have.status(200)
         response.should.be.json;
         response.body.should.be.a('array');
-        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id'])
+        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id', 'points'])
         response.body[0].id.should.equal(1)
         response.body[0].name.should.equal('jon snow');
         response.body[0].email.should.equal('jon@knownothing.com')
@@ -51,10 +51,11 @@ describe('API Routes', () => {
       .then( response => {
         response.should.have.status(200);
         response.should.be.json;
-        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id'])
+        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id', 'points'])
         response.body[0].id.should.equal(1)
         response.body[0].name.should.equal('jon snow');
         response.body[0].email.should.equal('jon@knownothing.com')
+        response.body[0].points.should.equal(0)
         response.body[0].stack_id.should.equal(1);        
       })
     })

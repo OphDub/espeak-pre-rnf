@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary();
       table.string('name');
       table.string('email');
+      table.integer('points');
       table.integer('stack_id').unsigned();
       table.foreign('stack_id').references('stack.id')
     }),
