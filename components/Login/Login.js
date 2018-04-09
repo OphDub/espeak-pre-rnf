@@ -54,7 +54,8 @@ export default class Login extends Component <Props> {
   renderRegister = () => {
     return (
       <Register handleRegistration={this.props.handleRegistration}
-                toggleRegistration={this.toggleRegistration}/>
+                toggleRegistration={this.toggleRegistration}
+                beRegistration={this.props.beRegistration}/>
     )
   }
 

@@ -45,7 +45,8 @@ export default class Register extends Component <Props>{
       return this.setState({ showAlert: true, alertMsg });
     }
 
-    this.props.toggleRegistration(user);
+    this.props.handleRegistration(user);
+    this.props.beRegistration(user);
   }
 
   showAlert = () => {
