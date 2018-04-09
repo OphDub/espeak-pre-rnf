@@ -1,4 +1,4 @@
-# Espeak
+# Espeak | [![Build Status](https://travis-ci.org/OphDub/espeak.svg?branch=master)](https://travis-ci.org/OphDub/espeak)
 
 ## Synopsis
 
