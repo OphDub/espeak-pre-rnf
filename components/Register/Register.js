@@ -41,11 +41,13 @@ export default class Register extends Component <Props>{
         <TextInput
           style={styles.input}
           value={this.state.password}
+          secureTextEntry={true}
           onChangeText={(password) => this.setState({ password })}
           placeholder="password"/>
         <TextInput
           style={styles.input}
           value={this.state.confirmPassword}
+          secureTextEntry={true}
           onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
           placeholder="confirm password"/>
         <TouchableOpacity
@@ -64,6 +66,7 @@ export default class Register extends Component <Props>{
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
