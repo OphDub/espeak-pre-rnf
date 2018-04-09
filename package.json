@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start-be": "node server.js",
-    "test": "NODE_ENV=test mocha --exit"
+    "test": "mocha --exit"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
