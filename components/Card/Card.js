@@ -47,24 +47,25 @@ export default class Card extends Component {
     
     return (
       <View style={styles.container}>
-        <Text>How do you say...</Text>
+        <Text style={styles.question}>How do you say...</Text>
         <View style={styles.engCard}>
         {
         this.props &&
-          <Text style={styles.engText}>{ english }</Text>
+          <Text style={styles.engText}>{ english.toUpperCase() }</Text>
         }
         </View>
-        <Text>in Spanish?</Text>
+        <Text style={styles.question}>in Spanish?</Text>
         <TextInput 
           placeholder='Type word in Spanish'
           onChangeText={(text) => this.handleChange(text)}
           value={this.state.answer}
+          style={styles.spanInput}
         />
         <TouchableOpacity
           onPress={() => this.handleSubmit()}
           style={styles.submitBtn}
         >
-          <Text>SUBMIT</Text>
+          <Text style={styles.btnText}>SUBMIT</Text>
         </TouchableOpacity> 
         <AwesomeAlert
           show={showAlert}
@@ -96,17 +97,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  btnText: {
+    color: '#FFF',
+  },
+  question: {
+    fontSize: 20,
+  },
   engCard: {
     alignItems: 'center',
     borderColor: '#1E3888',
     borderRadius: 8,
     borderWidth: 2,
-    paddingVertical: 30,
-    width: 150,
+    backgroundColor: 'white',
+    paddingVertical: 35,
+    width: 220,
+    marginVertical: 15,
+    shadowColor: '#979797',
+    shadowOpacity: 0.7,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 4,
   },
   engText: {
-    color: '#1E3888'
+    color: '#1E3888',
+    fontSize: 25,
+  },
+  spanInput: {
+    fontSize: 20,
+    margin: 15,
+    borderBottomWidth: 2,
+    borderColor: '#3AAFB9',
+    padding: 5,
+    width: 250,
   },
   submitBtn: {
+    backgroundColor: '#3AAFB9',
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#979797',
+    shadowOpacity: 0.7,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 4,
   }
 })
