@@ -58,6 +58,11 @@ export default class Login extends Component <Props> {
     )
   }
 
+  renderView = () => {
+    const { toggleRegister } = this.state;
+    return toggleRegister ? this.renderRegister() : this.renderLogin();
+  }
+
   toggleRegistration = () => {
     const { toggleRegister } = this.state;
 
@@ -71,8 +76,7 @@ export default class Login extends Component <Props> {
   render() {
     return (
       <View style={styles.container}>
-        { !this.state.toggleRegister && this.renderLogin() }
-        { this.state.toggleRegister && this.renderRegister() }
+        { this.renderView() }
       </View>
     )
   }
@@ -80,6 +84,7 @@ export default class Login extends Component <Props> {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
