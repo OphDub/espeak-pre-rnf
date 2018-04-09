@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native';
 import Card from '../Card/Card';
+import Progress from '../Progress/Progress';
 
 type Props = {};
 export default class WordCards extends Component<Props> {
@@ -82,6 +83,7 @@ export default class WordCards extends Component<Props> {
 
     return (
       <View style={styles.container}>
+        <Progress stack={this.state.stack}/>
         { this.handleCardLoad() }
       </View>
     );
