@@ -67,8 +67,9 @@ export default class App extends Component<Props> {
     }
   }
 
-  handleRegistration = async () => {
-    this.setState({loading: true})
+  handleRegistration = async (userInfo) => {
+    this.setState({ loading: true });
+
     try {
       const user = await auth.createUserWithEmailAndPassword(email, password);
       this.setState({ user: user.email, loading: false })
