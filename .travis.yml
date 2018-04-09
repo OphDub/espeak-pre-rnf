@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- node
+services:
+- postgresql
+before_script:
+- psql -c 'CREATE DATABASE espeak_test;' -U postgres
+notifications:
+  email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: hanm+HWZ7y9GDGKIzRNp+YB2l6Ntrr9C+PXWMoYNovfksDV7mDjGzEvY1OKHtpUC46xyQEw4Dv26u77sUzSmr47Wj+zs5MpYkkrHOSarwMa30UuQr2/ZrYb+Mr+jB7a302JKXPY6J4letsBouSMCgL6b9OrZ9/xlfRCLEJjjfrqC8B9OCN+5mWjycJg57+rj2CZownGVHHELksc/z9YHyHTuGdlINDRYVWC5pIvXNjmIMWcHlTix1/boqYFQESHvmY98fFDxmH2+aaEZD+b5/FoUxkL8StY1aR7L+LWOSvTcFQxCrhd1b8K0KrNDNEyh6JveB18nztbIi6gtIOtpXN71nrfmNw3V8Wo6Ia1qi5bhr6Uix45NVpdpt+GZ/SQIgEGSx+wIqKPnId1yCq6apqgbgpyG0cZ3tzBCl0sO+T+uQuG+kMtiGobnMiOhoWQNUbErkrAIDCjz6ccpF+DNT4ie2Mqtr/kdcXIPAHheh/TWyl37K47na1KEHigkYMn7nDvWtVzwEWD589CeBOQR8fffVO3NrI6YtMH2/LM+gnt3XlrrOXSSd5BewpQpX8NeCbSeGIq+45A0q18VQcEzE3fMl0AhlQAfz9gb5tYHemRx5HSzRtSdAbzEwaMUvgUdGUCywQAO/djXS4ZdGpy9WI5wHC/U+euLsuGp4FmVefs=
+  app: espeak-be
+  skip_cleanup: true
