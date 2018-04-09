@@ -19,3 +19,14 @@ export const signInUserFb = async (email, password) => {
     console.log(error);
   }
 };
+
+export const verbAndParse = (verb, url, data) => {
+  const initialFetch = fetch(url, {
+    body: JSON.stringify(data),
+    cache: 'no-cache',
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: `${verb.toUpperCase()}`
+  });
+};
