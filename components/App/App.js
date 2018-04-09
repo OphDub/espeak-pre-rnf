@@ -33,7 +33,6 @@ const navConfig = {
 
 const RootNav = TabNavigator(routeConfig, navConfig);
 
-
 const config = {
   apiKey: keys.firebase,
   authDomain: "espeak-53f28.firebaseapp.com",
@@ -80,15 +79,15 @@ export default class App extends Component<Props> {
   }
 
   showCondition = () => {
-    if (this.state.user) {
+    //if (this.state.user) {
       return <RootNav 
                 screenProps={{userEmail: this.state.user}}
               />
-    } else {
-      return <Login handleLogin={this.handleLogin}
-                    handleRegistration={this.handleRegistration}/>
+    //} else {
+     // return <Login handleLogin={this.handleLogin}
+      //              handleRegistration={this.handleRegistration}/>
 
-    }
+    //}
   }
 
   render() {
