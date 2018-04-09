@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   question: {
-    fontFamily: 'Roboto',
     fontSize: 20,
   },
   engCard: {
