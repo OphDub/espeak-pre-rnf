@@ -7,6 +7,7 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 type Props = {};
 export default class Register extends Component <Props>{
@@ -17,11 +18,28 @@ export default class Register extends Component <Props>{
       userName: '',
       password: '',
       confirmPassword: '',
+      showAlert: false,
     }
   }
 
   validateRegistration = () => {
+    const {
+      email,
+      userName,
+      password,
+      confirmPassword,
+    } = this.state;
 
+    if (password === '' || confirmPassword === '') {
+      //alert message for passwords as empty
+    }
+
+    if (password !== confirmPassword) {
+      //alert message for passwords not matching
+    }
+
+    const registration = { email, userName, password };
+    // this.props.toggleRegistration(registration);
   }
 
   render() {
@@ -55,7 +73,7 @@ export default class Register extends Component <Props>{
           <Text>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.toggleRegistration() }
+          onPress={() => this.validateRegistration() }
           style={styles.loginBtn}>
             <Text>Have account? Login</Text>
         </TouchableOpacity>
