@@ -13,6 +13,7 @@ import Settings from '../Settings/Settings';
 import WordStackNav from '../WordStackNav/WordStackNav';
 import { keys } from '../../keys';
 import * as firebase from 'firebase';
+import { verbAndParse } from '../../helper';
 
 const routeConfig = {
   Decks: {
@@ -49,49 +50,64 @@ const auth = firebase.auth();
 type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       user: null,
       loading: false,
-    }
+    };
   }
 
   handleLogin = async (email, password) => {
-    this.setState({loading: true})
+    this.setState({ loading: true });
+
     try {
       const user = await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ user: user.email, loading: false  })
+      this.setState({ user: user.email, loading: false });
       console.log('User signed in', user);
     } catch (error) {
       console.log(error);
     }
   }
 
-  handleRegistration = async () => {
-    this.setState({loading: true})
+  handleRegistration = async (userInfo) => {
+    const { email, userName, password } = userInfo;
+    this.setState({ loading: true });
+
     try {
       const user = await auth.createUserWithEmailAndPassword(email, password);
-      this.setState({ user: user.email, loading: false })
+      this.setState({ user: user.email, loading: false });
       console.log('User created', user);
     } catch (error) {
       console.log(error);
     }
   }
 
+  beRegistration = async (userInfo) => {
+    try {
+      const { email, userName, password } = userInfo;
+      const user = { name: userName, email: email, stack_id: 1 };
+      const url = 'https://espeak-be.herokuapp.com/api/v1/users';
+      const response = await verbAndParse('POST', url, user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   showCondition = () => {
-    //if (this.state.user) {
-      return <RootNav 
+    if (this.state.user) {
+      return <RootNav
                 screenProps={{userEmail: this.state.user}}
               />
-    //} else {
-     // return <Login handleLogin={this.handleLogin}
-      //              handleRegistration={this.handleRegistration}/>
+    } else {
+     return <Login handleLogin={this.handleLogin}
+                   handleRegistration={this.handleRegistration}
+                   beRegistration={this.beRegistration}/>
 
-    //}
+    }
   }
 
   render() {
-    return (   
+    return (
       this.showCondition()
     );
   }
