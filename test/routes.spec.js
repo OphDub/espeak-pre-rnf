@@ -61,18 +61,34 @@ describe('API Routes', () => {
     })
   })
 
-  describe('POST /api/v1/users', () => {
-    return chai.request(server)
-    .post('/api/v1/users')
-    .send({
-      name: 'pophus',
-      email: 'pophus@notpophanda.com',
-      stack_id: 1
+  describe('PATCH /api/v1/users/:id', () => {
+    it('should update the users points and', () => {
+      return chai.request(server)
+      .patch('/api/v1/users/1')
+      .send({
+        points: 50
+      })
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+      })
     })
-    .then( response => {
-      response.should.have.status(202);
-      response.should.be.json;
-      response.body.user[0].should.equal(2)
+  })
+
+  describe('POST /api/v1/users', () => {
+    it('should post a new user', () => {
+      return chai.request(server)
+      .post('/api/v1/users')
+      .send({
+        name: 'pophus',
+        email: 'pophus@notpophanda.com',
+        stack_id: 1
+      })
+      .then( response => {
+        response.should.have.status(202);
+        response.should.be.json;
+        response.body.user[0].should.equal(2)
+      })
     })
   })
 
