@@ -14,6 +14,7 @@ import WordStackNav from '../WordStackNav/WordStackNav';
 import { keys } from '../../keys';
 import * as firebase from 'firebase';
 import { verbAndParse } from '../../helper';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 const routeConfig = {
   Decks: {
@@ -54,7 +55,17 @@ export default class App extends Component<Props> {
     this.state = {
       user: null,
       loading: false,
+      showAlert: false,
+      alertMsg: '',
     };
+  }
+
+  showAlert = () => {
+    this.setState({ showAlert: true });
+  }
+
+  hideAlert = () => {
+    this.setState({ showAlert: false });
   }
 
   handleLogin = async (email, password) => {
@@ -65,7 +76,7 @@ export default class App extends Component<Props> {
       this.setState({ user: user.email, loading: false });
       console.log('User signed in', user);
     } catch (error) {
-      console.log(error);
+      this.setState({ showAlert:true, alertMsg:error.message });
     }
   }
 
@@ -78,7 +89,10 @@ export default class App extends Component<Props> {
       this.setState({ user: user.email, loading: false });
       console.log('User created', user);
     } catch (error) {
-      console.log(error);
+      this.setState({
+        showAlert: true,
+        alertMsg: `Invalid user name or password.`
+      });
     }
   }
 
@@ -99,10 +113,28 @@ export default class App extends Component<Props> {
                 screenProps={{userEmail: this.state.user}}
               />
     } else {
-     return <Login handleLogin={this.handleLogin}
-                   handleRegistration={this.handleRegistration}
-                   beRegistration={this.beRegistration}/>
-
+      return (
+        <View style={styles.container}>
+          <Login
+            handleLogin={this.handleLogin}
+            handleRegistration={this.handleRegistration}
+            beRegistration={this.beRegistration}/>
+          <AwesomeAlert
+            show={this.state.showAlert}
+            showProgress={false}
+            title={`Uh oh! There's a problem!`}
+            message={this.state.alertMsg}
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showCancelButton={false}
+            showConfirmButton={true}
+            confirmText="OK"
+            confirmButtonColor="#3AAFb9"
+            onConfirmPressed={() => {
+              this.hideAlert();
+            }}/>
+        </View>
+      )
     }
   }
 
