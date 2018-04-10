@@ -33,6 +33,23 @@ app.get('/api/v1/users/:id', (request, response) => {
     })
 })
 
+app.patch('/api/v1/users/:id', (request, response) => {
+  const { id } = request.params;
+  const userPatch = request.body;
+
+  database('users').where('id', id).update(userPatch)
+    .then( user => {
+      if ( user ) {
+        response.status(200).json({ id });
+      } else {
+        response.status(404).json({ error: `No user with ${id} to update` });
+      }
+    })
+    .catch( error => {
+      response.status(500).json({ error });
+    })
+})
+
 app.post('/api/v1/users', (request, response) => {
   const user = request.body;
   

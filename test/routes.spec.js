@@ -35,7 +35,7 @@ describe('API Routes', () => {
         response.should.have.status(200)
         response.should.be.json;
         response.body.should.be.a('array');
-        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id'])
+        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id', 'points'])
         response.body[0].id.should.equal(1)
         response.body[0].name.should.equal('jon snow');
         response.body[0].email.should.equal('jon@knownothing.com')
@@ -51,27 +51,44 @@ describe('API Routes', () => {
       .then( response => {
         response.should.have.status(200);
         response.should.be.json;
-        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id'])
+        response.body[0].should.have.all.keys(['name', 'email', 'id', 'stack_id', 'points'])
         response.body[0].id.should.equal(1)
         response.body[0].name.should.equal('jon snow');
         response.body[0].email.should.equal('jon@knownothing.com')
+        response.body[0].points.should.equal(0)
         response.body[0].stack_id.should.equal(1);        
       })
     })
   })
 
-  describe('POST /api/v1/users', () => {
-    return chai.request(server)
-    .post('/api/v1/users')
-    .send({
-      name: 'pophus',
-      email: 'pophus@notpophanda.com',
-      stack_id: 1
+  describe('PATCH /api/v1/users/:id', () => {
+    it('should update the users points and', () => {
+      return chai.request(server)
+      .patch('/api/v1/users/1')
+      .send({
+        points: 50
+      })
+      .then( response => {
+        response.should.have.status(200);
+        response.should.be.json;
+      })
     })
-    .then( response => {
-      response.should.have.status(202);
-      response.should.be.json;
-      response.body.user[0].should.equal(2)
+  })
+
+  describe('POST /api/v1/users', () => {
+    it('should post a new user', () => {
+      return chai.request(server)
+      .post('/api/v1/users')
+      .send({
+        name: 'pophus',
+        email: 'pophus@notpophanda.com',
+        stack_id: 1
+      })
+      .then( response => {
+        response.should.have.status(202);
+        response.should.be.json;
+        response.body.user[0].should.equal(2)
+      })
     })
   })
 

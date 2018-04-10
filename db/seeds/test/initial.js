@@ -37,7 +37,8 @@ exports.seed = function (knex, Promise) {
               {
                 name: 'jon snow',
                 email: 'jon@knownothing.com',
-                stack_id: stackId[0]
+                stack_id: stackId[0],
+                points: 0
               }
             )
           })
