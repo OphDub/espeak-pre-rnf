@@ -45,6 +45,7 @@ export default class Decks extends Component<Props> {
             </Text>
             )
           }
+          keyExtractor={item => item.category}
         />
       </View>
     )

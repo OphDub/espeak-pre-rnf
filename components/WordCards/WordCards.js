@@ -46,13 +46,13 @@ export default class WordCards extends Component<Props> {
     const currentCard = this.state.words.find(card => card.isCurrent === true);
     if (!currentCard) {
       return (
-        <View>
-          <Text>Good job!</Text>
+        <View style={styles.endMsgCont}>
+          <Text style={styles.endMsg}>Great job!</Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Decks')}
             style={styles.homeBtn}
           >
-            <Text>BACK TO MY DECKS</Text>
+            <Text style={styles.homeBtnText}>BACK TO MY DECKS</Text>
           </TouchableOpacity>
         </View>
       )
@@ -96,6 +96,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
   },
+  endMsg: {
+    color: '#272727',
+    fontSize: 20,
+    marginBottom: 20,
+  },
+  endMsgCont: {
+    alignItems: 'center',
+  },
   homeBtn: {
+    backgroundColor: '#3AAFB9',
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#979797',
+    shadowOpacity: 0.7,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 4,
+  },
+  homeBtnText: {
+    color: '#FFF',
   },
 });
