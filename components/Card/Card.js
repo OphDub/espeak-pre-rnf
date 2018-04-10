@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   },
   question: {
     fontSize: 20,
+    fontFamily: 'Roboto',
   },
   engCard: {
     alignItems: 'center',
